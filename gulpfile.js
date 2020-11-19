@@ -1,5 +1,5 @@
 // パッケージパッケージの読み込み
-const { src, dest, parallel } = require('gulp');
+const { src, dest, parallel, watch } = require('gulp');
 
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
@@ -54,10 +54,22 @@ const css = () => {
     .pipe(dest('dist/assets/css/', { sourcemaps: '.' }));
 };
 
+const watchFiles = () => {
+  watch(paths.pug, function(cb) {
+    html();
+    cb();
+  });
+  watch(paths.scss, function(cb) {
+    css();
+    cb();
+  });
+}
+
 const build = parallel(html, css);
 
 // Gulpタスク エクスポート
 exports.html = html;
 exports.css = css;
+exports.watchFiles = watchFiles;
 
 exports.build = build;
