@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/camp-team/gulp-hands-on-2020/issues"
   },
-  "homepage": "https://github.com/camp-team/gulp-hands-on-2020#readme"
+  "homepage": "https://github.com/camp-team/gulp-hands-on-2020#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
 }
