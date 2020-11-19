@@ -1,0 +1,13 @@
+@use '../settings/variables';
+@use '../settings/mixins';
+
+.test {
+  display: grid;
+}
+
+.test2 {
+  display: flex;
+  & > * {
+    flex: 1;
+  }
+}

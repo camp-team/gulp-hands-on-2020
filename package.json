@@ -20,6 +20,7 @@
   "devDependencies": {
     "autoprefixer": "^9.8.6",
     "css-declaration-sorter": "^5.1.2",
+    "csswring": "^7.0.0",
     "gulp": "^4.0.2",
     "gulp-dart-sass": "^1.0.2",
     "gulp-postcss": "^9.0.0",
