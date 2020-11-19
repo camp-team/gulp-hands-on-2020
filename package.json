@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/camp-team/gulp-hands-on-2020#readme",
   "devDependencies": {
-    "gulp": "^4.0.2"
+    "gulp": "^4.0.2",
+    "gulp-dart-sass": "^1.0.2"
   }
 }
