@@ -1,5 +1,5 @@
 // パッケージパッケージの読み込み
-const { src, dest, parallel, watch } = require('gulp');
+const { src, dest, parallel, series, watch } = require('gulp');
 
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
@@ -12,6 +12,8 @@ const autoprefixer = require('autoprefixer');
 const flexBugsFixes = require('postcss-flexbugs-fixes');
 const declarationSorter = require('css-declaration-sorter');
 const cssWring = require('csswring');
+
+const browserSync = require('browser-sync').create();
 
 // オプション設定
 const paths = {
@@ -37,6 +39,10 @@ const postcssOption = [
   cssWring
 ];
 
+const browserSyncOption = {
+  server: './dist'
+};
+
 // Gulpタスク 定義
 const html = () => {
   return src([paths.pug, '!**/*_*'])
@@ -51,7 +57,8 @@ const css = () => {
       outputStyle: 'expanded'
     }).on('error', sass.logError))
     .pipe(postcss(postcssOption))
-    .pipe(dest('dist/assets/css/', { sourcemaps: '.' }));
+    .pipe(dest('dist/assets/css/', { sourcemaps: '.' }))
+    .pipe(browserSync.stream());;
 };
 
 const watchFiles = () => {
@@ -65,6 +72,10 @@ const watchFiles = () => {
   });
 }
 
+const server = () => {
+  browserSync.init(browserSyncOption);
+};
+
 const build = parallel(html, css);
 
 // Gulpタスク エクスポート
@@ -73,3 +84,7 @@ exports.css = css;
 exports.watchFiles = watchFiles;
 
 exports.build = build;
+exports.default = series(
+  build,
+  parallel(server, watchFiles)
+);
