@@ -1,5 +1,5 @@
 // パッケージパッケージの読み込み
-const { src, dest } = require('gulp');
+const { src, dest, parallel } = require('gulp');
 
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
@@ -54,6 +54,10 @@ const css = () => {
     .pipe(dest('dist/assets/css/', { sourcemaps: '.' }));
 };
 
+const build = parallel(html, css);
+
 // Gulpタスク エクスポート
 exports.html = html;
 exports.css = css;
+
+exports.build = build;
