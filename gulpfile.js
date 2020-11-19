@@ -1,6 +1,11 @@
 // パッケージパッケージの読み込み
 const { src, dest } = require('gulp');
 
+const plumber = require('gulp-plumber');
+const notify = require('gulp-notify');
+
+const pug = require('gulp-pug');
+
 const sass = require('gulp-dart-sass');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
@@ -10,8 +15,14 @@ const cssWring = require('csswring');
 
 // オプション設定
 const paths = {
+  pug: './src/pug/**/*.pug',
   scss: './src/scss/**/*.scss',
 };
+
+const pugOption = {
+  basedir: './src/pug',
+  pretty: true // みやすいコードでの出力
+}
 
 const autoprefixerOption = {
   grid: true
@@ -27,6 +38,13 @@ const postcssOption = [
 ];
 
 // Gulpタスク 定義
+const html = () => {
+  return src([paths.pug, '!**/*_*'])
+    .pipe(plumber({ errorHandler: notify.onError("Error: <%= error.message %>") }))
+    .pipe(pug(pugOption))
+    .pipe(dest('dist/'))
+};
+
 const css = () => {
   return src(paths.scss, { sourcemaps: true })
     .pipe(sass({
@@ -37,4 +55,5 @@ const css = () => {
 };
 
 // Gulpタスク エクスポート
+exports.html = html;
 exports.css = css;
