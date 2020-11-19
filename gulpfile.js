@@ -70,6 +70,10 @@ const watchFiles = () => {
     css();
     cb();
   });
+  watch(['./dist/**/*.html'], function(cb) {
+    browserSync.reload()
+    cb();
+  });
 }
 
 const server = () => {
