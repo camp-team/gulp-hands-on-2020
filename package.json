@@ -19,6 +19,7 @@
   "homepage": "https://github.com/camp-team/gulp-hands-on-2020#readme",
   "devDependencies": {
     "autoprefixer": "^9.8.6",
+    "browser-sync": "^2.26.13",
     "css-declaration-sorter": "^5.1.2",
     "csswring": "^7.0.0",
     "gulp": "^4.0.2",
