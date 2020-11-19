@@ -1,3 +1,4 @@
+// パッケージパッケージの読み込み
 const { src, dest } = require('gulp');
 
 const sass = require('gulp-dart-sass');
@@ -7,6 +8,7 @@ const flexBugsFixes = require('postcss-flexbugs-fixes');
 const declarationSorter = require('css-declaration-sorter');
 const cssWring = require('csswring');
 
+// オプション設定
 const paths = {
   scss: './src/scss/**/*.scss',
 };
@@ -24,6 +26,7 @@ const postcssOption = [
   cssWring
 ];
 
+// Gulpタスク 定義
 const css = () => {
   return src(paths.scss, { sourcemaps: true })
     .pipe(sass({
@@ -33,4 +36,5 @@ const css = () => {
     .pipe(dest('dist/assets/css/', { sourcemaps: '.' }));
 };
 
+// Gulpタスク エクスポート
 exports.css = css;
