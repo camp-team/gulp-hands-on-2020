@@ -1,0 +1,74 @@
+@use '../settings/variables';
+@use '../settings/mixins';
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  background-color: #fff;
+  color: variables.$color-font;
+  font-family: variables.$font-default;
+  font-size: 15px;
+  font-weight: 500;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+p,
+ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
+img {
+  max-width: 100%;
+}
+audio,
+canvas,
+img,
+video {
+  vertical-align: middle;
+}
+address {
+  font: inherit;
+}
+dl,
+dd,
+figure {
+  margin: 0;
+}
+a:link,
+a:focus,
+a:hover,
+a:active,
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+em,
+i,
+cite,
+time {
+  font-style: normal;
+}
+small,
+sub,
+sup {
+  font-size: 0.8em;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 24px;
+}
