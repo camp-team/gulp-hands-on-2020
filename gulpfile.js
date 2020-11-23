@@ -44,7 +44,7 @@ const css = () => {
       cssWring
     ]))
     .pipe(dest('dist/assets/css/', { sourcemaps: '.' }))
-    .pipe(browserSync.stream());;
+    .pipe(browserSync.stream());
 };
 
 const watchFiles = () => {
