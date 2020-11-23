@@ -10,7 +10,7 @@ $ npm i
 
 ## dev （ホットリロード）
 ```
-$ npm gulp
+$ npx gulp
 ```
 
 ## build
