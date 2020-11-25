@@ -6,6 +6,44 @@
   color: #fff;
   text-align: center;
   padding: 16px 0;
+  &__pagetop-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    display: block;
+    background-color: rgba(variables.$color-main, .8);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s, visibility .4s;
+    z-index: 100;
+    @include mixins.pc {
+      right: 24px;
+      bottom: 60px;
+      width: 54px;
+      height: 54px;
+    }
+    &.active {
+      visibility: visible;
+      opacity: 1;
+      &:hover {
+        opacity: .6;
+      }
+    }
+    &::before {
+      content: '';
+      position: absolute;
+      top: 57.5%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      width: 15px;
+      height: 15px;
+      border-top: 2px solid #fff;
+      border-right: 2px solid #fff;
+    }
+  }
   &__copy {
     opacity: .4;
     font-size: 14px;
