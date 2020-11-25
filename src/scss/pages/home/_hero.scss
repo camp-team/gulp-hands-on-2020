@@ -1,0 +1,50 @@
+@use '../../settings/variables';
+@use '../../settings/mixins';
+
+.home-hero {
+  &__inner {
+    padding: 32px 16px;
+    position: relative;
+    min-height: 240px;
+    border-radius: 16px;
+    background: #eee url('../images/hero.jpg') no-repeat center/cover;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    @include mixins.pc {
+      min-height: 600px;
+    }
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+  &__main {
+    position: relative;
+    text-align: center;
+  }
+  &__catch {
+    font-size: 24px;
+  }
+  &__text {
+    margin-top: 16px;
+    text-align: left;
+    @include mixins.pc {
+      text-align: center;
+    }
+    br {
+      display: none;
+      @include mixins.pc {
+        display: inline;
+      }
+    }
+  }
+}

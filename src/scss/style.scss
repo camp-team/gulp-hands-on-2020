@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
-@use 'common/normalize';
-@use 'common/base';
-@use 'common/test';
+@forward 'common/normalize';
+@forward 'common/base';
+@forward 'common/header';
+@forward 'common/footer';
+
+@forward 'pages/home/title';
+@forward 'pages/home/hero';
+@forward 'pages/home/about';
+@forward 'pages/home/use';
+@forward 'pages/home/template';
+@forward 'pages/home/cv';
+
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');

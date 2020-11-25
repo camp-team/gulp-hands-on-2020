@@ -7,11 +7,13 @@
   box-sizing: border-box;
 }
 body {
+  padding-top: 64px;
   background-color: #fff;
   color: variables.$color-font;
   font-family: variables.$font-default;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
+  line-height: 1.5;
 }
 h1,
 h2,

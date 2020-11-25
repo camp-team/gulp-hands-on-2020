@@ -1,6 +1,10 @@
-$color-main: #AAD6EC;
-$color-base: #EEF9FF;
-$color-accent: #FC9D9D;
-$color-font: #5B5B5B;
+$color-main: #6b8dd6;
+$color-main-bright: #2cd8d5;
+$color-base: rgba($color-main, 0.1);
+$color-accent: #8e37d7;
+$color-font: #333333;
+
+$bg-grad: linear-gradient(-225deg, $color-main-bright 0%, $color-main 48%, $color-accent 100%);
 
 $font-default: '游ゴシック体', YuGothic, '游ゴシック', 'Yu Gothic', 'メイリオ', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', sans-serif;
+$font-logo: 'Kaushan Script', cursive;

@@ -1,0 +1,13 @@
+header.header
+  .container
+    .header__inner
+      h1.header-logo
+        a.header-logo__link.js-scroll-pagetop(href="") #{siteTitle}
+      .header__actions
+        button#js-gnav-toggle-btn.header__toggle-btn
+      nav#js-gnav.header-nav
+        ul.header-nav__list
+          each item in gnavList
+            li.header-nav__item
+              a.header-nav__link(href=item.url) #{item.text}
+        a(href="").header-nav__cv 使ってみる

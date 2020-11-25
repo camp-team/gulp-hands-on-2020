@@ -1,0 +1,151 @@
+@use '../settings/variables';
+@use '../settings/mixins';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 1000;
+  &__inner {
+    display: flex;
+    align-items: center;
+    height: 64px;
+  }
+  &__actions {
+    @include mixins.pc {
+      display: none;
+    }
+  }
+  &__toggle-btn {
+    position: relative;
+    margin-right: -14px;
+    cursor: pointer;
+    display: block;
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: none;
+    &::before, &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 50%;
+      width: 20px;
+      height: 2px;
+      transform: translateX(-50%);
+      background-color: variables.$color-font;
+      border-radius: 2px;
+    }
+    &::before {
+      top: calc( 50% - 6px );
+      transition: transform .3s, top .3s ease-in-out .3s;
+    }
+    &::after {
+      bottom: calc( 50% - 6px );
+      transition: transform .3s, bottom .3s ease-in-out .3s;
+    }
+    &.open {
+      &::before {
+        top: calc( 50% - 1px );
+        transform: translateX(-50%) rotate(-45deg);
+        transition: top .2s, transform .2s ease-in-out .3s;
+      }
+      &::after {
+        bottom: calc( 50% - 1px );
+        transform: translateX(-50%) rotate(45deg);
+        transition: bottom .2s, transform .2s ease-in-out .3s;
+      }
+    }
+  }
+}
+
+.header-logo {
+  margin-right: auto;
+  font-family: variables.$font-logo;
+  font-size: 24px;
+  font-weight: 700;
+  background-image: variables.$bg-grad;
+  color: variables.$color-main;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  &__link {
+    display: inline-block;
+    padding-right: .25em;
+  }
+}
+
+.header-nav {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 32px 16px;
+  background: variables.$bg-grad;
+  color: #fff;
+  text-align: center;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .6s, visibility .6s;
+  &.open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .6s, visibility .6s;
+  }
+  @include mixins.pc {
+    padding: 0;
+    position: static;
+    background-color: transparent;
+    background: none;
+    color: variables.$color-font;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    opacity: 1;
+    visibility: visible;
+  }
+  &__list {
+    @include mixins.pc {
+      display: flex;
+    }
+  }
+  &__item {
+    @include mixins.pc {
+      border-top: none;
+    }
+    &:not(:first-of-type) {
+      margin-top: 16px;
+      @include mixins.pc {
+        margin-top: 0;
+        margin-left: 8px;
+      }
+    }
+  }
+  &__link {
+    display: block;
+    padding: 16px;
+    @include mixins.pc {
+      padding: 8px;
+    }
+  }
+  &__cv {
+    margin-top: 16px;
+    display: block;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 50px;
+    color: variables.$color-main !important;
+    @include mixins.pc {
+      margin-top: 0;
+      margin-left: 16px;
+      display: inline-block;
+      padding: 8px 24px;
+      background-color: variables.$color-main;
+      color: #fff !important;
+    }
+  }
+}
