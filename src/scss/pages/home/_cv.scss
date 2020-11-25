@@ -30,5 +30,9 @@
     background: variables.$bg-grad;
     padding: 16px 32px;
     border-radius: 56px;
+    transition: box-shadow .4s;
+    &:hover {
+      box-shadow: 0 8px 32px 8px rgba(0,0,0,.1);
+    }
   }
 }

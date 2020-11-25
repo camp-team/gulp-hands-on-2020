@@ -72,8 +72,8 @@ sup {
 .container {
   margin: 0 auto;
   max-width: 1200px;
-  padding: 0 24px;
-  @include mixins.sp() {
-    padding: 0 16px;
+  padding: 0 16px;
+  @include mixins.pc {
+    padding: 0 24px;
   }
 }
