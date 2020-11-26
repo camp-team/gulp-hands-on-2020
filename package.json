@@ -7,6 +7,15 @@
     "start": "npx gulp",
     "build": "npx gulp build"
   },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 ChromeAndroid versions",
+    "last 2 iOS versions",
+    "last 2 Edge versions",
+    "ie 11"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/camp-team/gulp-hands-on-2020.git"
