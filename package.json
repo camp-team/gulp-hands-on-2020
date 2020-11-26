@@ -1,7 +1,7 @@
 {
   "name": "gulp-hands-on-2020",
   "version": "1.0.0",
-  "description": "## 弟1回 ### 日時 2020/11/19(木) 21:00 ~ 23:00",
+  "description": "Gulpハンズオン サンプルコード",
   "main": "index.js",
   "scripts": {
     "start": "npx gulp",
