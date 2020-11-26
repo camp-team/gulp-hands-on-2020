@@ -1,3 +1,4 @@
+// オブジェクトの読み込み
 const { src, dest, parallel, series, watch } = require('gulp');
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
@@ -10,11 +11,13 @@ const declarationSorter = require('css-declaration-sorter');
 const cssWring = require('csswring');
 const browserSync = require('browser-sync').create();
 
+// パスの設定
 const paths = {
   pug: './src/pug/**/*.pug',
   scss: './src/scss/**/*.scss',
 };
 
+// タスクの登録
 const html = () => {
   return src([
       paths.pug,
@@ -25,7 +28,7 @@ const html = () => {
       basedir: './src/pug',
       pretty: true
     }))
-    .pipe(dest('dist/'))
+    .pipe(dest('dist/'));
 };
 
 const css = () => {
@@ -70,6 +73,7 @@ const server = () => {
 
 const build = parallel(html, css);
 
+// タスクの宣言
 exports.html = html;
 exports.css = css;
 exports.watchFiles = watchFiles;
