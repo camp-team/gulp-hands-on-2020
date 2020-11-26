@@ -70,6 +70,7 @@ const image = () => {
       imageminPngquant({ quality: [ 0.65, 0.8 ] }),
       imageminMozjpeg({ quality: '80' }),
       imagemin.gifsicle(),
+      imagemin.mozjpeg(),
       imagemin.optipng(),
       imagemin.svgo()
     ]))
