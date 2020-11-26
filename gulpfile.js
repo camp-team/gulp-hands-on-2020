@@ -17,6 +17,8 @@ const imageminPngquant = require('imagemin-pngquant');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 const browserSync = require('browser-sync').create();
 
+const rimraf = require('rimraf');
+
 // パスの設定
 const paths = {
   pug: './src/pug/**/*.pug',
@@ -67,7 +69,7 @@ const image = () => {
   return src(paths.image)
     .pipe(imagemin([
       imageminPngquant({ quality: [ 0.65, 0.8 ] }),
-      imageminMozjpeg({ quality: '80' }),
+      imageminMozjpeg({ quality: '45' }),
       imagemin.gifsicle(),
       imagemin.mozjpeg(),
       imagemin.optipng(),
@@ -105,6 +107,10 @@ const server = () => {
   });
 };
 
+const deleteDist = (cb) => {
+  rimraf('./dist', cb);
+}
+
 const build = parallel(html, css, js, image);
 
 // タスクの宣言
@@ -113,7 +119,7 @@ exports.css = css;
 exports.js = js;
 exports.image = image;
 exports.watchFiles = watchFiles;
-exports.build = build;
+exports.build = series(deleteDist, build);
 exports.default = series(
   build,
   parallel(server, watchFiles)
