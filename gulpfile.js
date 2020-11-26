@@ -12,6 +12,9 @@ const cssWring = require('csswring');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 const webpackConfig = require('./webpack.config');
+const imagemin = require('gulp-imagemin');
+const imageminPngquant = require('imagemin-pngquant');
+const imageminMozjpeg = require('imagemin-mozjpeg');
 const browserSync = require('browser-sync').create();
 
 // パスの設定
@@ -19,6 +22,7 @@ const paths = {
   pug: './src/pug/**/*.pug',
   scss: './src/scss/**/*.scss',
   js: './src/js/**/*.js',
+  image: './src/images/**/*',
 };
 
 // タスクの登録
@@ -59,6 +63,19 @@ const js = () => {
     .pipe(dest('./dist/assets/js/'));
 };
 
+const image = () => {
+  return src(paths.image)
+    .pipe(imagemin([
+      imageminPngquant({ quality: [ 0.65, 0.8 ] }),
+      imageminMozjpeg({ quality: '80' }),
+      imagemin.gifsicle(),
+      imagemin.mozjpeg(),
+      imagemin.optipng(),
+      imagemin.svgo()
+    ]))
+    .pipe(dest('./dist/assets/images/'));
+};
+
 const watchFiles = () => {
   watch(paths.pug, function(cb) {
     html();
@@ -70,6 +87,10 @@ const watchFiles = () => {
   });
   watch(paths.js, function(cb) {
     js();
+    cb();
+  });
+  watch(paths.image, function(cb) {
+    image();
     cb();
   });
   watch('./dist/**/*.html', function(cb) {
@@ -84,12 +105,13 @@ const server = () => {
   });
 };
 
-const build = parallel(html, css, js);
+const build = parallel(html, css, js, image);
 
 // タスクの宣言
 exports.html = html;
 exports.css = css;
 exports.js = js;
+exports.image = image;
 exports.watchFiles = watchFiles;
 exports.build = build;
 exports.default = series(
