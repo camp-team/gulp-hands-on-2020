@@ -69,7 +69,7 @@ const image = () => {
   return src(paths.image)
     .pipe(imagemin([
       imageminPngquant({ quality: [ 0.65, 0.8 ] }),
-      imageminMozjpeg({ quality: '45' }),
+      imageminMozjpeg({ quality: '85' }),
       imagemin.gifsicle(),
       imagemin.mozjpeg(),
       imagemin.optipng(),
