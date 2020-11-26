@@ -9,12 +9,16 @@ const autoprefixer = require('autoprefixer');
 const flexBugsFixes = require('postcss-flexbugs-fixes');
 const declarationSorter = require('css-declaration-sorter');
 const cssWring = require('csswring');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
+const webpackConfig = require('./webpack.config');
 const browserSync = require('browser-sync').create();
 
 // パスの設定
 const paths = {
   pug: './src/pug/**/*.pug',
   scss: './src/scss/**/*.scss',
+  js: './src/js/**/*.js',
 };
 
 // タスクの登録
@@ -50,6 +54,13 @@ const css = () => {
     .pipe(browserSync.stream());
 };
 
+const js = (cb) => {
+  webpackStream(webpackConfig, webpack)
+    .pipe(dest('./dist/assets/js/'))
+    .pipe(browserSync.stream());
+  cb();
+};
+
 const watchFiles = () => {
   watch(paths.pug, function(cb) {
     html();
@@ -57,6 +68,10 @@ const watchFiles = () => {
   });
   watch(paths.scss, function(cb) {
     css();
+    cb();
+  });
+  watch(paths.js, function(cb) {
+    js();
     cb();
   });
   watch('./dist/**/*.html', function(cb) {
@@ -71,11 +86,12 @@ const server = () => {
   });
 };
 
-const build = parallel(html, css);
+const build = parallel(html, css, js);
 
 // タスクの宣言
 exports.html = html;
 exports.css = css;
+exports.js = js;
 exports.watchFiles = watchFiles;
 exports.build = build;
 exports.default = series(
