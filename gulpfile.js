@@ -15,9 +15,9 @@ const webpackConfig = require('./webpack.config');
 const imagemin = require('gulp-imagemin');
 const imageminPngquant = require('imagemin-pngquant');
 const imageminMozjpeg = require('imagemin-mozjpeg');
+const rimraf = require('rimraf');
 const browserSync = require('browser-sync').create();
 
-const rimraf = require('rimraf');
 
 // パスの設定
 const paths = {
@@ -101,17 +101,21 @@ const watchFiles = () => {
   });
 }
 
+const deleteDist = (cb) => {
+  rimraf('./dist', cb);
+};
+
+const build = series(
+  deleteDist,
+  parallel(html, css, js, image)
+);
+
 const server = () => {
   browserSync.init({
     server: './dist'
   });
 };
 
-const deleteDist = (cb) => {
-  rimraf('./dist', cb);
-}
-
-const build = parallel(html, css, js, image);
 
 // タスクの宣言
 exports.html = html;
@@ -119,7 +123,7 @@ exports.css = css;
 exports.js = js;
 exports.image = image;
 exports.watchFiles = watchFiles;
-exports.build = series(deleteDist, build);
+exports.build = build;
 exports.default = series(
   build,
   parallel(server, watchFiles)
